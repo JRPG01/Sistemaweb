@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import { Grid } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -27,16 +26,12 @@ export default function FullScreenDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
-
   return (
     
     <React.Fragment>
         <Button onClick={handleClickOpen}>
           Mas detalles
-        </Button>{
-          props.datos1.map((producto,index)=>(
-            <div key={index}>
+        </Button>
         <Dialog
           fullScreen
           open={open}
@@ -60,19 +55,18 @@ export default function FullScreenDialog(props) {
           </AppBar>
           <List>
             <ListItemButton>
-              <ListItemText primary={producto.Nombre} secondary={producto.Marca} />
+              <ListItemText primary={props.datos1.Nom} secondary={props.datos1.Marca} />
             </ListItemButton>
             <Divider />
             <ListItemButton>
               <ListItemText
-                primary={producto.Titulo}
-                secondary={producto.Detalles}
+                primary={props.datos1.Titulo}
+                secondary={props.datos1.Detalles}
               />
             </ListItemButton>
           </List>
         </Dialog>
-        </div>
-        ))}</React.Fragment>
+        </React.Fragment>
 
   );
 }
