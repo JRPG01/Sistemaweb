@@ -11,12 +11,13 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
+import { Grid } from '@mui/material';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -27,48 +28,51 @@ export default function FullScreenDialog() {
     setOpen(false);
   };
 
+
   return (
+    
     <React.Fragment>
-      <Button onClick={handleClickOpen}>
-        Mas detalles
-      </Button>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItemButton>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItemButton>
-          <Divider />
-          <ListItemButton>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItemButton>
-        </List>
-      </Dialog>
-    </React.Fragment>
+        <Button onClick={handleClickOpen}>
+          Mas detalles
+        </Button>{
+          props.datos1.map((producto,index)=>(
+            <div key={index}>
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleClose}
+          TransitionComponent={Transition}
+        >
+          <AppBar sx={{ position: 'relative' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                detalles
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <List>
+            <ListItemButton>
+              <ListItemText primary={producto.Nombre} secondary={producto.Marca} />
+            </ListItemButton>
+            <Divider />
+            <ListItemButton>
+              <ListItemText
+                primary={producto.Titulo}
+                secondary={producto.Detalles}
+              />
+            </ListItemButton>
+          </List>
+        </Dialog>
+        </div>
+        ))}</React.Fragment>
+
   );
 }

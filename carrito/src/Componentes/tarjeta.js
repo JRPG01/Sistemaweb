@@ -20,6 +20,33 @@ const datos =
     name : "Monitor", description : "42 pulgadas, monitor gamer curvo", price : 3754},
   ];
 
+  const datos1 = [
+    {Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
+{Nombre: "Celular", Marca: "Iphone",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
+{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
+{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
+{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
+{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
+    "Modelo de procesador: Intel Core i5-1135G7 \n"+
+"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
+"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"}
+  ];
+
   const Tarjetas = () => {
     return (
       <Grid container spacing={2}>
@@ -50,7 +77,7 @@ const datos =
 
               </CardContent>
               <CardActions>
-                <FullScreenDialog></FullScreenDialog>
+                <FullScreenDialog datos1={datos1}></FullScreenDialog>
                 <Button size="small">Comprar</Button>
               </CardActions>
             </Card>
