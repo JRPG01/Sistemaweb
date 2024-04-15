@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid } from '@mui/material';
 import FullScreenDialog from './detallesproducto';
+import React, {useState, useEffect} from 'react';
 
 
 const datos = 
@@ -82,7 +82,42 @@ const datos =
   ];
   const Tarjetas = () => {
     console.log(datos);
+
+    const [contador, setContador] = useState(0);
+    const [total, setTotal] = useState(0);
+    const [carrito, setCarrito] = useState([]);
+    
+    useEffect(() => {
+      // Cargar el carrito desde localStorage al iniciar el componente
+      const cargarCarritoDesdeLocalStorage = () => {
+        const items = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          const item = JSON.parse(localStorage.getItem(key));
+          items.push(item);
+        }
+        setCarrito(items);
+      };
+  
+      cargarCarritoDesdeLocalStorage();
+    }, []);
+
+    const handleCompra = (index,nombre,precio) => {
+      // Convertir los datos a una cadena JSON antes de almacenarlos
+      const datosJson = JSON.stringify(nombre+" "+precio);
+      
+      // Almacenar los datos en Local Storage
+      localStorage.setItem(index, datosJson);
+
+      setTotal(total + precio);
+
+      setContador(contador + 1);
+
+      // Actualizar el carrito
+    setCarrito([...carrito, { nombre, precio }]);
+    };
     return (
+      
       <Grid container spacing={2}>
         {datos.map((producto, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
@@ -112,39 +147,25 @@ const datos =
               </CardContent>
               <CardActions>
                 <FullScreenDialog datos1={datos[index]}></FullScreenDialog>
-                <Button size="small">Comprar</Button>
+                <Button size="small" onClick={()=>handleCompra(index,producto.Nom,producto.price)}>Comprar</Button>
+                
               </CardActions>
             </Card>
           </Grid>
         ))}
+
+
+  <div>
+        <h2>Carrito de Compras</h2>
+        <ul>
+          {carrito.map((item, index) => (
+            <li key={index}>{item.nombre} - ${item.precio}</li>
+          ))}
+        </ul>
+      </div>
       </Grid>
+      
     );
   };
   
   export default Tarjetas;
-  /*const datos1 = [
-    {Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-{Nombre: "Celular", Marca: "Iphone",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-{Nombre: "Laptop", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-{Nombre: "Monitor", Marca: "asus",Titulo: "Detalles", Detalles:"-La computadora se actualiza y personaliza profesionalmente Nuestros ingenieros profesionales abrirán la caja del fabricante para personalizarla y probarla. Las imperfecciones se reducen significativamente gracias a nuestra inspección en profundidad y pruebas \n "+
-    "Modelo de procesador: Intel Core i5-1135G7 \n"+
-"Núcleos: 4\n"+"Subprocesos totales: 8 \n"+"Frecuencia turbo máxima: hasta 4,2 GHz; Frecuencia turbo máxima de núcleo eficiente: 2,4 GHz \n"+
-"Gráficos: Gráficos Intel Iris Xe \n"+"Pantalla: FHD de 15,6 pulgadas (1920 x 1080) \n"+"Conectividad: Wi-Fi y Bluetooth \n"+"Dimensiones: 14,17 x 9,25 x 0,78 pulgadas; Peso (aproximado): 3,97 libras"},
-  ];*/
