@@ -1,6 +1,7 @@
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Grid } from '@mui/material';
 import FullScreenDialog from './detallesproducto';
 import React, {useState, useEffect} from 'react';
+import LongMenu from './carrito';
 
 
 const datos = 
@@ -102,68 +103,59 @@ const datos =
       cargarCarritoDesdeLocalStorage();
     }, []);
 
-    const handleCompra = (index,nombre,precio) => {
-      // Convertir los datos a una cadena JSON antes de almacenarlos
-      const datosJson = JSON.stringify(nombre+" "+precio);
-      
-      // Almacenar los datos en Local Storage
+    const handleCompra = (index, nombre, precio) => {
+      const nuevoCarrito = [...carrito, { nombre, precio }];
+      setCarrito(nuevoCarrito);
+    
+      const datosJson = JSON.stringify(nombre + " " + precio);
       localStorage.setItem(index, datosJson);
-
+    
       setTotal(total + precio);
-
       setContador(contador + 1);
-
-      // Actualizar el carrito
-    setCarrito([...carrito, { nombre, precio }]);
     };
     return (
-      
-      <Grid container spacing={2}>
-        {datos.map((producto, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card sx={{ maxWidth: 345, margin: 1 }}>
-              <CardMedia
-                component = "img"
-                sx={{ 
-                  height: 180,
-                  width: 210,
-                  display: 'block',
-                  margin: 'auto',
-                }}
-                image= {producto.image}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {producto.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {producto.description}
-                </Typography>
-                <Typography variant="h6" sx={{textAlign:'left'}} >
-                  ${producto.price}.
-                  <span style={{ fontSize: '0.7em' }}>00</span>
-                </Typography>
+      <div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <h3>${total} MX</h3>
+          <LongMenu carrito={carrito} />
+        </div>
+        <Grid container spacing={2}>
+          {datos.map((producto, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card sx={{ maxWidth: 345, margin: 1 }}>
+                <CardMedia
+                  component = "img"
+                  sx={{ 
+                    height: 180,
+                    width: 210,
+                    display: 'block',
+                    margin: 'auto',
+                  }}
+                  image= {producto.image}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {producto.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {producto.description}
+                  </Typography>
+                  <Typography variant="h6" sx={{textAlign:'left'}} >
+                    ${producto.price}.
+                    <span style={{ fontSize: '0.7em' }}>00</span>
+                  </Typography>
 
-              </CardContent>
-              <CardActions>
-                <FullScreenDialog datos1={datos[index]}></FullScreenDialog>
-                <Button size="small" onClick={()=>handleCompra(index,producto.Nom,producto.price)}>Comprar</Button>
-                
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-
-
-  <div>
-        <h2>Carrito de Compras</h2>
-        <ul>
-          {carrito.map((item, index) => (
-            <li key={index}>{item.nombre} - ${item.precio}</li>
+                </CardContent>
+                <CardActions>
+                  <FullScreenDialog datos1={datos[index]}></FullScreenDialog>
+                  <Button size="small" onClick={()=>handleCompra(index,producto.Nom,producto.price)}>Comprar</Button>
+                  
+                </CardActions>
+              </Card>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       </div>
-      </Grid>
       
     );
   };

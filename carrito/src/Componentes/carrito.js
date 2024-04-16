@@ -1,34 +1,19 @@
-import * as React from 'react';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
-];
-
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu() {
+export default function LongMenu({ carrito }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -61,11 +46,19 @@ export default function LongMenu() {
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
+        {carrito &&
+        carrito.map((item, index) => {
+          // Verificar si el item fue agregado manualmente (no desde Local Storage)
+          const esManual = item.nombre && item.precio;
+
+          return (
+            esManual && (
+              <MenuItem key={index} onClick={handleClose}>
+                {item.nombre} - ${item.precio}
+              </MenuItem>
+            )
+          );
+        })}
       </Menu>
     </div>
   );

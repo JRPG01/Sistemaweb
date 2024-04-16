@@ -14,7 +14,6 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Shazam Store
           </Typography>
-          <LongMenu></LongMenu>
         </Toolbar>
       </AppBar>
     </Box>
